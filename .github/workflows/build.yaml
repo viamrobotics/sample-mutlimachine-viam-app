@@ -1,0 +1,33 @@
+# see https://github.com/viamrobotics/build-action for help
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+" # the build-action will trigger on tags with the format 1.0.0
+      - "[0-9]+.[0-9]+.[0-9]+-rc[0-9]+" # also support release candidate tags like 1.0.0-rc0
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 'Install Node.js 20'
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version: '20'
+      
+      - name: Check Node and NPM versions
+        run: |
+          which node
+          node -v
+          which npm
+          npm -v
+
+      - uses: viamrobotics/build-action@v1.6
+        with:
+          # note: you can replace this line with 'version: ""' if
+          # you want to test the build process without deploying
+          version: ${{ github.ref_name }}
+          ref: ${{ github.sha }}
+          key-id: ${{ secrets.viam_key_id }}
+          key-value: ${{ secrets.viam_key_value }}
