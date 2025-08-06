@@ -3,13 +3,10 @@ import Cookies from "js-cookie";
 import { fragmentID,robotListDivName, userTokenCookieName } from "./constants";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const parsedAccessTokenCookie = JSON.parse(Cookies.get(userTokenCookieName)!);
-  const accessToken = parsedAccessTokenCookie.accessToken; // TODO: Check field name
-
+  const {access_token: accessToken} = JSON.parse(Cookies.get(userTokenCookieName)!);
   const viamClient = await connect(accessToken);
     
   const locationSummaries = await viamClient.appClient.listMachineSummaries("", [fragmentID]);
-
   
   const robotListDiv: HTMLElement | null = document.getElementById(robotListDivName);
 
@@ -33,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function connect(accessToken: string): Promise<VIAM.ViamClient> {
   const opts: VIAM.ViamClientOptions = {
-    serviceHost: "https://app.viam.com",
+    serviceHost: "https://app.viam.dev",
     credentials: {
       type: "access-token",
       payload: accessToken,
