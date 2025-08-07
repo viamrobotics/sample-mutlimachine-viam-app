@@ -1,6 +1,6 @@
 import * as VIAM from "@viamrobotics/sdk";
 import Cookies from "js-cookie";
-import { robotListDivName, userTokenCookieName } from "./constants";
+import { fragmentID, robotListDivName, userTokenCookieName } from "./constants";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userTokenRawCookie = Cookies.get(userTokenCookieName)!;
@@ -11,9 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const viamClient = await connect(accessToken);
   
-  // TODO: include fragment filtering
-  // const locationSummaries = await viamClient.appClient.listMachineSummaries("", [fragmentID]);
-  const locationSummaries = await viamClient.appClient.listMachineSummaries("");
+  const locationSummaries = await viamClient.appClient.listMachineSummaries("", [fragmentID]);
+  // const locationSummaries = await viamClient.appClient.listMachineSummaries("");
   
   const robotListDiv: HTMLElement | null = document.getElementById(robotListDivName);
 
