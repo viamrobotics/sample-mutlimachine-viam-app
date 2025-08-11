@@ -2,7 +2,7 @@
   "module_id": "nicolas-viam:sample-multimachine-app-module",
   "visibility": "public",
   "description": "This module is an example of a multi-machine Viam App.",
-  "url": "https://github.com/viamrobotics/sample-multimachine-app-module",
+  "url": "https://github.com/viamrobotics/sample-mutlimachine-viam-app",
   "applications": [
     {
       "name": "multimachine-sample-app",
