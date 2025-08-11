@@ -1,6 +1,6 @@
 .PHONY: create update upload build
 
-VERSION := 1.0.27
+VERSION := 1.1.0
 MODULE_NAME := sample-multimachine-app-module
 ORG_PUBLIC_NAMESPACE := nicolas-viam
 

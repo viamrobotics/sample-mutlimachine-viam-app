@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function connect(accessToken: string): Promise<VIAM.ViamClient> {
   const opts: VIAM.ViamClientOptions = {
-    serviceHost: "https://app.viam.dev",
+    serviceHost: "https://app.viam.com",
     credentials: {
       type: "access-token",
       payload: accessToken,
