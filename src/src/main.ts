@@ -3,16 +3,12 @@ import Cookies from "js-cookie";
 import { fragmentID, robotListDivName, userTokenCookieName } from "./constants";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const userTokenRawCookie = Cookies.get(userTokenCookieName)!;
-  const startIndex = userTokenRawCookie.indexOf("{");
-  const endIndex = userTokenRawCookie.indexOf("}");
-  const userTokenValue = userTokenRawCookie.slice(startIndex, endIndex+1);
-  const {access_token: accessToken} = JSON.parse(userTokenValue);
+  const userTokenCookie = Cookies.get(userTokenCookieName)!;
+  const {access_token: accessToken} = JSON.parse(userTokenCookie);
 
   const viamClient = await connect(accessToken);
   
   const locationSummaries = await viamClient.appClient.listMachineSummaries("", [fragmentID]);
-  // const locationSummaries = await viamClient.appClient.listMachineSummaries("");
   
   const robotListDiv: HTMLElement | null = document.getElementById(robotListDivName);
 
