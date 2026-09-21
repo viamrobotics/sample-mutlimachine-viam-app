@@ -14,7 +14,7 @@
     "vite": "^6.4.3"
   },
   "dependencies": {
-    "@viamrobotics/sdk": "^0.74.2",
+    "@viamrobotics/sdk": "^0.75.0",
     "js-cookie": "^3.0.7"
   },
   "overrides": {
