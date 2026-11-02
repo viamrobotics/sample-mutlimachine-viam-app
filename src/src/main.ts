@@ -4,20 +4,24 @@ import { fragmentID, robotListDivName, userTokenCookieName } from "./constants";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userTokenCookie = Cookies.get(userTokenCookieName)!;
-  const {access_token: accessToken} = JSON.parse(userTokenCookie);
+  const { access_token: accessToken } = JSON.parse(userTokenCookie);
 
   const viamClient = await connect(accessToken);
-  
-  const locationSummaries = await viamClient.appClient.listMachineSummaries("", [fragmentID]);
-  
-  const robotListDiv: HTMLElement | null = document.getElementById(robotListDivName);
 
-  if (robotListDiv){
-    robotListDiv.innerText = '';
+  const locationSummaries = await viamClient.appClient.listMachineSummaries(
+    "",
+    [fragmentID],
+  );
+
+  const robotListDiv: HTMLElement | null =
+    document.getElementById(robotListDivName);
+
+  if (robotListDiv) {
+    robotListDiv.innerText = "";
     for (let i = 0; i < locationSummaries.length; i++) {
       const location = document.createElement("h2");
       location.textContent = `${locationSummaries[i].locationName} (ID: ${locationSummaries[i].locationId})`;
-      
+
       robotListDiv.appendChild(location);
 
       for (let j = 0; j < locationSummaries[i].machineSummaries.length; j++) {
@@ -30,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
   }
-  console.log("DOMContentLoaded event processed")
+  console.log("DOMContentLoaded event processed");
 });
 
 async function connect(accessToken: string): Promise<VIAM.ViamClient> {
