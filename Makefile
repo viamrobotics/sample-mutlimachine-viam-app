@@ -1,4 +1,4 @@
-.PHONY: create update upload build
+.PHONY: create update upload build lint
 
 VERSION := 1.1.1
 MODULE_NAME := sample-multimachine-app-module
@@ -16,3 +16,7 @@ upload: build
 build:
 	cd src && npm install && npm run build
 	tar czf module.tar.gz module meta.json
+
+# Fixes formatting in place; CI runs the same check without --write.
+lint:
+	npx --yes prettier@3.9.10 --write src
